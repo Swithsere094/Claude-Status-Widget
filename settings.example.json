@@ -1,0 +1,9 @@
+{
+  "hooks": {
+    "SessionStart":     [{ "hooks": [{ "type": "command", "command": "python C:/Users/TU_USUARIO/.claude/claude_status.py start" }] }],
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "python C:/Users/TU_USUARIO/.claude/claude_status.py working" }] }],
+    "Stop":             [{ "hooks": [{ "type": "command", "command": "python C:/Users/TU_USUARIO/.claude/claude_status.py done" }] }],
+    "Notification":     [{ "hooks": [{ "type": "command", "command": "python C:/Users/TU_USUARIO/.claude/claude_status.py waiting" }] }],
+    "SessionEnd":       [{ "hooks": [{ "type": "command", "command": "python C:/Users/TU_USUARIO/.claude/claude_status.py end" }] }]
+  }
+}
