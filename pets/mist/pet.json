@@ -1,0 +1,809 @@
+{
+ "id": "mist",
+ "name": "Mist",
+ "species": "fantasma",
+ "description": "Fantasma de pixel art: siempre flota, da una vuelta al terminar y se desvanece al despedirse.",
+ "width": 24,
+ "height": 24,
+ "transparent": ".",
+ "fixed_layers": [
+  "bubble",
+  "check",
+  "z_small",
+  "z_big"
+ ],
+ "blink": {
+  "targets": [
+   "eyes_open",
+   "eyes_down"
+  ],
+  "min_ms": 2500,
+  "max_ms": 6000,
+  "sequence": [
+   [
+    "eyes_half",
+    60
+   ],
+   [
+    "eyes_closed",
+    110
+   ],
+   [
+    "eyes_half",
+    60
+   ]
+  ]
+ },
+ "shared_colors": {
+  "P": "#1d1a2b",
+  "W": "#ffffff",
+  "G": "#3ccf6e",
+  "R": "#e5484d",
+  "K": "#4a5160",
+  "k": "#2a2f39",
+  "S": "#9ad1ff",
+  "Z": "#d4dde8"
+ },
+ "palettes": {
+  "blanco": {
+   "name": "Blanco",
+   "B": "#eef2f7",
+   "b": "#cdd6e1",
+   "o": "#4a5568",
+   "r": "#f5b5c4"
+  },
+  "lila": {
+   "name": "Lila",
+   "B": "#dccbf6",
+   "b": "#b9a3e3",
+   "o": "#4b3a6e",
+   "r": "#f3a6c8"
+  },
+  "menta": {
+   "name": "Menta",
+   "B": "#c4f0dc",
+   "b": "#98d6b9",
+   "o": "#2f5a49",
+   "r": "#f5b0b8"
+  },
+  "celeste": {
+   "name": "Celeste",
+   "B": "#c6e4fb",
+   "b": "#9cc6ea",
+   "o": "#2d4b6a",
+   "r": "#f5b0c0"
+  },
+  "rosa": {
+   "name": "Rosa",
+   "B": "#fbd0e0",
+   "b": "#eba8c2",
+   "o": "#6a3048",
+   "r": "#f28aa8"
+  }
+ },
+ "layers": {
+  "body": {
+   "x": 3,
+   "y": 5,
+   "rows": [
+    ".....oooooooo.....",
+    "...ooBBBBBBBBoo...",
+    "..oBBBBBBBBBBBBo..",
+    ".oBBBBBBBBBBBBBBo.",
+    ".oBBBBBBBBBBBBBBo.",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo",
+    "obBBBBBBBBBBBBBBbo"
+   ]
+  },
+  "skirt_a": {
+   "x": 3,
+   "y": 20,
+   "rows": [
+    "obBBBBBBBBBBBBBBBo",
+    "oBBBo..oBBo..oBBBo",
+    ".ooo....oo....ooo."
+   ]
+  },
+  "skirt_b": {
+   "x": 3,
+   "y": 20,
+   "rows": [
+    "obBBBBBBBBBBBBBBBo",
+    "oBBo..oBBBBo..oBBo",
+    ".oo....oooo....oo."
+   ]
+  },
+  "eyes_open": {
+   "x": 8,
+   "y": 11,
+   "rows": [
+    "WP....WP",
+    "PP....PP",
+    "PP....PP"
+   ]
+  },
+  "eyes_down": {
+   "x": 8,
+   "y": 12,
+   "rows": [
+    "WP....WP",
+    "PP....PP",
+    "PP....PP"
+   ]
+  },
+  "eyes_half": {
+   "x": 8,
+   "y": 12,
+   "rows": [
+    "PP....PP",
+    "PP....PP"
+   ]
+  },
+  "eyes_closed": {
+   "x": 7,
+   "y": 13,
+   "rows": [
+    "oooo..oooo"
+   ]
+  },
+  "eyes_happy": {
+   "x": 7,
+   "y": 11,
+   "rows": [
+    ".oo....oo.",
+    "o..o..o..o"
+   ]
+  },
+  "cheeks": {
+   "x": 6,
+   "y": 14,
+   "rows": [
+    "rr........rr"
+   ]
+  },
+  "mouth": {
+   "x": 10,
+   "y": 14,
+   "rows": [
+    "o..o",
+    ".oo."
+   ]
+  },
+  "mouth_open": {
+   "x": 10,
+   "y": 14,
+   "rows": [
+    ".oo.",
+    "oPPo"
+   ]
+  },
+  "arm_r": {
+   "x": 20,
+   "y": 13,
+   "rows": [
+    "oo.",
+    "BBo",
+    "oo."
+   ]
+  },
+  "arm_up": {
+   "x": 20,
+   "y": 7,
+   "rows": [
+    ".oo",
+    "oBo",
+    "oBo",
+    "oBo",
+    "BBo",
+    "Bo.",
+    "o.."
+   ]
+  },
+  "arm_mid": {
+   "x": 20,
+   "y": 10,
+   "rows": [
+    "..o",
+    ".oo",
+    "oBo",
+    "BBo",
+    "Bo.",
+    "o.."
+   ]
+  },
+  "laptop": {
+   "x": 4,
+   "y": 17,
+   "rows": [
+    ".kkkkkkkkkkkkkk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKSSKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    "kkkkkkkkkkkkkkkk"
+   ]
+  },
+  "tip_l_up": {
+   "x": 6,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_l_down": {
+   "x": 6,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_up": {
+   "x": 15,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_down": {
+   "x": 15,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "bubble": {
+   "x": 16,
+   "y": 0,
+   "rows": [
+    ".WWW.",
+    "WWRWW",
+    "WWRWW",
+    "WWWWW",
+    "WWRWW",
+    ".WWW."
+   ]
+  },
+  "check": {
+   "x": 17,
+   "y": 0,
+   "rows": [
+    "....G",
+    "...GG",
+    "G.GG.",
+    "GGG..",
+    ".G..."
+   ]
+  },
+  "z_small": {
+   "x": 15,
+   "y": 2,
+   "rows": [
+    "ZZ",
+    ".Z",
+    "ZZ"
+   ]
+  },
+  "z_big": {
+   "x": 18,
+   "y": 0,
+   "rows": [
+    "ZZZ",
+    "..Z",
+    ".Z.",
+    "Z..",
+    "ZZZ"
+   ]
+  },
+  "arm_l": {
+   "x": 1,
+   "y": 13,
+   "rows": [
+    ".oo",
+    "oBB",
+    ".oo"
+   ]
+  }
+ },
+ "animations": {
+  "idle": {
+   "label": "inactiva",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": 0,
+     "ms": 520
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -1,
+     "ms": 520
+    }
+   ]
+  },
+  "sleep": {
+   "label": "dormido",
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "cheeks"
+     ],
+     "dy": 1,
+     "ms": 800
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "cheeks",
+      "z_small"
+     ],
+     "dy": 1,
+     "ms": 800
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "cheeks",
+      "z_small",
+      "z_big"
+     ],
+     "dy": 2,
+     "ms": 900
+    }
+   ]
+  },
+  "working": {
+   "label": "trabajando",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "eyes_down",
+      "cheeks",
+      "mouth",
+      "laptop",
+      "tip_l_up",
+      "tip_r_down"
+     ],
+     "ms": 170
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "eyes_down",
+      "cheeks",
+      "mouth",
+      "laptop",
+      "tip_l_down",
+      "tip_r_up"
+     ],
+     "ms": 170
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "eyes_down",
+      "cheeks",
+      "mouth",
+      "laptop",
+      "tip_l_up",
+      "tip_r_down"
+     ],
+     "dy": -1,
+     "ms": 170
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "eyes_down",
+      "cheeks",
+      "mouth",
+      "laptop",
+      "tip_l_down",
+      "tip_r_up"
+     ],
+     "dy": -1,
+     "ms": 170
+    }
+   ]
+  },
+  "done": {
+   "label": "listo",
+   "blink": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -1,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r"
+     ],
+     "dy": -2,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -3,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r"
+     ],
+     "dy": -2,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -1,
+     "ms": 140
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth",
+      "check"
+     ],
+     "ms": 800
+    }
+   ],
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "cheeks",
+      "mouth",
+      "check"
+     ],
+     "dy": 0,
+     "ms": 520
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "cheeks",
+      "mouth",
+      "check"
+     ],
+     "dy": -1,
+     "ms": 520
+    }
+   ]
+  },
+  "waiting": {
+   "label": "te espera",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_up",
+      "eyes_open",
+      "cheeks",
+      "mouth_open",
+      "bubble"
+     ],
+     "ms": 260
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_up",
+      "eyes_open",
+      "cheeks",
+      "mouth",
+      "bubble"
+     ],
+     "dy": -1,
+     "ms": 260
+    }
+   ]
+  },
+  "bye": {
+   "label": "despedida",
+   "end": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": 0,
+     "dissolve": 0.1,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": 0,
+     "dissolve": 0.2,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -1,
+     "dissolve": 0.3,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -1,
+     "dissolve": 0.42,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -2,
+     "dissolve": 0.55,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -2,
+     "dissolve": 0.68,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -3,
+     "dissolve": 0.8,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_a",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -3,
+     "dissolve": 0.9,
+     "ms": 110
+    },
+    {
+     "layers": [
+      "body",
+      "skirt_b",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "cheeks",
+      "mouth"
+     ],
+     "dy": -4,
+     "dissolve": 1.0,
+     "ms": 110
+    }
+   ],
+   "loop": [
+    {
+     "layers": [],
+     "ms": 1000
+    }
+   ]
+  }
+ }
+}

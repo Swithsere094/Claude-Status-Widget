@@ -9,13 +9,15 @@ id, name, species, description   identificacion de la mascota (id = nombre de la
 width, height                    tamano del lienzo; debe ser WIDTH x HEIGHT
 transparent                      caracter que no se dibuja (normalmente ".")
 shared_colors                    {caracter: "#rrggbb"} comunes a todas las paletas
-palettes                         {id: {"name": "...", caracter: "#rrggbb", ...}}
+palettes                         {id: {"name": "...", caracter: "#rrggbb", ..., "hide_layers"?: [...]}}
+                                 hide_layers: capas que ese color no dibuja (marcas propias de otro pelaje)
 layers                           {nombre: {"x", "y", "rows": ["...", ...]}}
 fixed_layers                     capas que no se mueven con "dy" (globos, signos)
 blink (opcional)                 {"targets", "min_ms", "max_ms", "sequence": [[capa, ms], ...]}
 animations                       {estado: {"label", "intro"?, "loop", "blink"?, "end"?}}
 
-Cada frame es {"layers": [...], "ms": n, "dy"?: n, "dissolve"?: 0..1}.
+Cada frame es {"layers": [...], "ms": n, "dx"?: n, "dy"?: n, "dissolve"?: 0..1}.
+"dx" y "dy" desplazan las capas (salvo las fijas); lo que sale del lienzo no se dibuja.
 "dissolve" borra esa fraccion de pixeles (siempre los mismos), para desvanecer.
 """
 import json
@@ -24,6 +26,14 @@ from pathlib import Path
 WIDTH = 24
 HEIGHT = 24
 REQUIRED_STATES = ("idle", "working", "done", "waiting", "sleep", "bye")
+
+
+PALETTE_META = {"name", "hide_layers"}
+
+
+def palette_colors(palette):
+    """Solo los colores de una paleta (sin nombre ni opciones)."""
+    return {k: v for k, v in palette.items() if k not in PALETTE_META}
 
 
 def validate(pet, folder_name=None):
@@ -52,7 +62,11 @@ def validate(pet, folder_name=None):
     for pid, pal in pet["palettes"].items():
         if "name" not in pal:
             err(f"la paleta '{pid}' no tiene 'name'")
-    palette_chars = [set(p) - {"name"} for p in pet["palettes"].values()]
+        for name in pal.get("hide_layers", []):
+            if name not in pet["layers"]:
+                err(f"paleta '{pid}': hide_layers nombra la capa '{name}', que no existe")
+    palette_chars = [palette_colors(p).keys() for p in pet["palettes"].values()]
+    palette_chars = [set(k) for k in palette_chars]
     common_palette_chars = set.intersection(*palette_chars) if palette_chars else set()
     if palette_chars and any(c != palette_chars[0] for c in palette_chars):
         err("todas las paletas deben definir los mismos caracteres")
@@ -108,6 +122,9 @@ def validate(pet, folder_name=None):
                 for name in f.get("layers", []):
                     if name not in layers:
                         err(f"{where}: la capa '{name}' no existe")
+                for axis in ("dx", "dy"):
+                    if not isinstance(f.get(axis, 0), int):
+                        err(f"{where}: '{axis}' debe ser un entero")
                 d = f.get("dissolve", 0)
                 if not 0 <= d <= 1:
                     err(f"{where}: 'dissolve' debe estar entre 0 y 1")

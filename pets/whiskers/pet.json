@@ -1,0 +1,940 @@
+{
+ "id": "whiskers",
+ "name": "Whiskers",
+ "species": "gato",
+ "description": "Gato de pixel art: mueve la cola, se estira al terminar, duerme echado y sale de un salto.",
+ "width": 24,
+ "height": 24,
+ "transparent": ".",
+ "fixed_layers": [
+  "bubble",
+  "check",
+  "z_small",
+  "z_big"
+ ],
+ "blink": {
+  "targets": [
+   "eyes_open",
+   "eyes_down"
+  ],
+  "min_ms": 3000,
+  "max_ms": 8000,
+  "sequence": [
+   [
+    "eyes_half",
+    80
+   ],
+   [
+    "eyes_closed",
+    140
+   ],
+   [
+    "eyes_half",
+    80
+   ]
+  ]
+ },
+ "shared_colors": {
+  "P": "#15151a",
+  "W": "#ffffff",
+  "w": "#d9dde3",
+  "G": "#3ccf6e",
+  "R": "#e5484d",
+  "K": "#4a5160",
+  "k": "#2a2f39",
+  "S": "#9ad1ff",
+  "Z": "#d4dde8"
+ },
+ "palettes": {
+  "atigrado": {
+   "name": "Atigrado",
+   "B": "#e89a4f",
+   "b": "#c27434",
+   "o": "#3f2210",
+   "L": "#fbe3c4",
+   "s": "#b8622a",
+   "c": "#e89a4f",
+   "I": "#7ccf6a",
+   "n": "#f29aa6",
+   "m": "#e89a4f",
+   "t": "#e89a4f",
+   "u": "#b8622a",
+   "hide_layers": [
+    "cap",
+    "calico_face",
+    "calico_body"
+   ]
+  },
+  "bicolor": {
+   "name": "Bicolor",
+   "B": "#f7f5f0",
+   "b": "#d9d6cf",
+   "o": "#121216",
+   "L": "#ffffff",
+   "s": "#f7f5f0",
+   "c": "#f7f5f0",
+   "I": "#cdd25a",
+   "n": "#f2a7b4",
+   "m": "#3d3d48",
+   "t": "#3d3d48",
+   "u": "#30303a",
+   "hide_layers": [
+    "calico_face",
+    "calico_body"
+   ]
+  },
+  "negro": {
+   "name": "Negro",
+   "B": "#3a3a44",
+   "b": "#2a2a32",
+   "o": "#0d0d11",
+   "L": "#55555f",
+   "s": "#3a3a44",
+   "c": "#3a3a44",
+   "I": "#d9e86a",
+   "n": "#c97b88",
+   "m": "#3a3a44",
+   "t": "#3a3a44",
+   "u": "#3a3a44",
+   "hide_layers": [
+    "cap",
+    "calico_face",
+    "calico_body"
+   ]
+  },
+  "crema": {
+   "name": "Crema",
+   "B": "#f1dcb4",
+   "b": "#d8bd8e",
+   "o": "#4a3a24",
+   "L": "#fff6e6",
+   "s": "#dcb985",
+   "c": "#f1dcb4",
+   "I": "#6fb3e0",
+   "n": "#f4a3ad",
+   "m": "#f1dcb4",
+   "t": "#f1dcb4",
+   "u": "#dcb985",
+   "hide_layers": [
+    "cap",
+    "calico_face",
+    "calico_body"
+   ]
+  },
+  "calico": {
+   "name": "Calicó",
+   "B": "#fbf7f0",
+   "b": "#e0d8cc",
+   "o": "#3a3330",
+   "L": "#ffffff",
+   "s": "#e8913f",
+   "c": "#3b3438",
+   "I": "#8ccf6a",
+   "n": "#f29aa6",
+   "m": "#fbf7f0",
+   "t": "#fbf7f0",
+   "u": "#e8913f",
+   "hide_layers": [
+    "cap"
+   ]
+  }
+ },
+ "layers": {
+  "tail_a": {
+   "x": 19,
+   "y": 8,
+   "rows": [
+    "...oo",
+    "..oto",
+    "..oto",
+    "..ouo",
+    "..oto",
+    "..oto",
+    "..ouo",
+    ".oto.",
+    ".oto.",
+    ".ouo.",
+    "oto..",
+    "oto..",
+    "oo..."
+   ]
+  },
+  "tail_b": {
+   "x": 19,
+   "y": 8,
+   "rows": [
+    "..oo.",
+    ".oto.",
+    "..oto",
+    "..ouo",
+    "..oto",
+    "..oto",
+    "..ouo",
+    ".oto.",
+    ".oto.",
+    ".ouo.",
+    "oto..",
+    "oto..",
+    "oo..."
+   ]
+  },
+  "tail_up": {
+   "x": 19,
+   "y": 4,
+   "rows": [
+    "...oo",
+    "..oto",
+    "..oto",
+    "..ouo",
+    "..oto",
+    "..oto",
+    "..oto",
+    "..ouo",
+    "..oto",
+    "..oto",
+    "..ouo",
+    ".oto.",
+    ".oto.",
+    ".ouo.",
+    "oto..",
+    "oto..",
+    "oo..."
+   ]
+  },
+  "tail_wrap": {
+   "x": 4,
+   "y": 19,
+   "rows": [
+    "..ooooooooooooo.",
+    ".ottuttttuttttto",
+    "..ooooooooooooo."
+   ]
+  },
+  "body": {
+   "x": 3,
+   "y": 4,
+   "rows": [
+    "..o............o..",
+    ".oBo..........oBo.",
+    ".onBo........oBno.",
+    "oonBBooooooooBBnoo",
+    "oBBBBBsBBBBsBBBBBo",
+    "oBBBBBBsBBsBBBBBBo",
+    "oBBBBBBBBBBBBBBBBo",
+    "oBBBBBBBBBBBBBBBBo",
+    "oBBBBLLLnnLLLBBBBo",
+    "ooBBBLLoLLoLLBBBoo",
+    ".oBBBLLLLLLLLBBBo.",
+    ".osBBLLLLLLLLBBso.",
+    ".obBBLLLLLLLLBBbo.",
+    ".osBBLLLLLLLLBBso.",
+    ".obBBLLLLLLLLBBbo.",
+    ".obBBBLLLLLLBBBbo.",
+    ".obBoLLLooLLLoBbo.",
+    ".oooooooooooooooo."
+   ]
+  },
+  "cap": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    ".m............m.",
+    "..m..........m..",
+    "..mm........mm..",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmm....mmmmmm",
+    "mm............mm",
+    "mm............mm",
+    "m..............m"
+   ]
+  },
+  "calico_face": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    ".c...",
+    "cc...",
+    "cc...",
+    ".cc.."
+   ]
+  },
+  "calico_body": {
+   "x": 14,
+   "y": 15,
+   "rows": [
+    "..cc",
+    ".ccc",
+    "..c."
+   ]
+  },
+  "whisk_l": {
+   "x": 1,
+   "y": 12,
+   "rows": [
+    "ww",
+    "w."
+   ]
+  },
+  "eyes_open": {
+   "x": 6,
+   "y": 9,
+   "rows": [
+    "III......III",
+    "IPI......IPI",
+    "IPI......IPI"
+   ]
+  },
+  "eyes_down": {
+   "x": 6,
+   "y": 9,
+   "rows": [
+    "III......III",
+    "III......III",
+    "IPI......IPI"
+   ]
+  },
+  "eyes_half": {
+   "x": 6,
+   "y": 9,
+   "rows": [
+    "ooo......ooo",
+    "IPI......IPI",
+    "III......III"
+   ]
+  },
+  "eyes_closed": {
+   "x": 5,
+   "y": 10,
+   "rows": [
+    "o...o....o...o",
+    ".ooo......ooo."
+   ]
+  },
+  "eyes_happy": {
+   "x": 5,
+   "y": 9,
+   "rows": [
+    ".ooo......ooo.",
+    "o...o....o...o"
+   ]
+  },
+  "mouth_open": {
+   "x": 10,
+   "y": 13,
+   "rows": [
+    ".oo.",
+    "onno",
+    ".oo."
+   ]
+  },
+  "paw_up": {
+   "x": 19,
+   "y": 9,
+   "rows": [
+    ".oo.",
+    "oLLo",
+    "oLLo",
+    "oBo.",
+    "oBo.",
+    "oBo.",
+    "oBo.",
+    "oBo."
+   ]
+  },
+  "paw_mid": {
+   "x": 19,
+   "y": 12,
+   "rows": [
+    "..oo",
+    ".oLo",
+    "oBo.",
+    "oBo.",
+    "oo.."
+   ]
+  },
+  "laptop": {
+   "x": 4,
+   "y": 17,
+   "rows": [
+    ".kkkkkkkkkkkkkk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKSSKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    "kkkkkkkkkkkkkkkk"
+   ]
+  },
+  "tip_l_up": {
+   "x": 7,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oLo"
+   ]
+  },
+  "tip_l_down": {
+   "x": 7,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oLo"
+   ]
+  },
+  "tip_r_up": {
+   "x": 14,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oLo"
+   ]
+  },
+  "tip_r_down": {
+   "x": 14,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oLo"
+   ]
+  },
+  "bubble": {
+   "x": 9,
+   "y": 0,
+   "rows": [
+    ".WWW.",
+    "WWRWW",
+    "WWRWW",
+    "WWWWW",
+    "WWRWW",
+    ".WWW."
+   ]
+  },
+  "check": {
+   "x": 10,
+   "y": 1,
+   "rows": [
+    "....G",
+    "...GG",
+    "G.GG.",
+    "GGG..",
+    ".G..."
+   ]
+  },
+  "z_small": {
+   "x": 13,
+   "y": 4,
+   "rows": [
+    "ZZ",
+    ".Z",
+    "ZZ"
+   ]
+  },
+  "z_big": {
+   "x": 16,
+   "y": 0,
+   "rows": [
+    "ZZZ",
+    "..Z",
+    ".Z.",
+    "Z..",
+    "ZZZ"
+   ]
+  },
+  "whisk_r": {
+   "x": 21,
+   "y": 12,
+   "rows": [
+    "ww",
+    ".w"
+   ]
+  }
+ },
+ "animations": {
+  "idle": {
+   "label": "inactiva",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "tail_a",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "ms": 900
+    },
+    {
+     "layers": [
+      "tail_b",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "ms": 900
+    }
+   ]
+  },
+  "sleep": {
+   "label": "dormido",
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "tail_wrap",
+      "eyes_closed"
+     ],
+     "dy": 1,
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "tail_wrap",
+      "eyes_closed",
+      "z_small"
+     ],
+     "dy": 1,
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "tail_wrap",
+      "eyes_closed",
+      "z_small",
+      "z_big"
+     ],
+     "dy": 1,
+     "ms": 900
+    }
+   ]
+  },
+  "working": {
+   "label": "trabajando",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "tail_a",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_down",
+      "laptop",
+      "tip_l_up",
+      "tip_r_down"
+     ],
+     "ms": 170
+    },
+    {
+     "layers": [
+      "tail_a",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_down",
+      "laptop",
+      "tip_l_down",
+      "tip_r_up"
+     ],
+     "ms": 170
+    }
+   ]
+  },
+  "done": {
+   "label": "listo",
+   "blink": true,
+   "intro": [
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_closed"
+     ],
+     "dy": 1,
+     "ms": 380
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_happy"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_happy"
+     ],
+     "dy": -3,
+     "ms": 140
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_happy"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_happy",
+      "check"
+     ],
+     "ms": 900
+    }
+   ],
+   "loop": [
+    {
+     "layers": [
+      "tail_a",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open",
+      "check"
+     ],
+     "ms": 900
+    },
+    {
+     "layers": [
+      "tail_b",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open",
+      "check"
+     ],
+     "ms": 900
+    }
+   ]
+  },
+  "waiting": {
+   "label": "te espera",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open",
+      "mouth_open",
+      "bubble"
+     ],
+     "ms": 320
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open",
+      "bubble"
+     ],
+     "dy": -1,
+     "ms": 320
+    }
+   ]
+  },
+  "bye": {
+   "label": "despedida",
+   "end": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_up",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_mid",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_up",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_mid",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_up",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "paw_mid",
+      "eyes_happy"
+     ],
+     "ms": 160
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dy": 1,
+     "ms": 200
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 1,
+     "dy": -1,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 3,
+     "dy": -3,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 6,
+     "dy": -5,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 9,
+     "dy": -6,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 13,
+     "dy": -6,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 17,
+     "dy": -5,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 21,
+     "dy": -3,
+     "ms": 60
+    },
+    {
+     "layers": [
+      "tail_up",
+      "body",
+      "cap",
+      "calico_face",
+      "calico_body",
+      "whisk_l",
+      "whisk_r",
+      "eyes_open"
+     ],
+     "dx": 25,
+     "dy": -1,
+     "ms": 60
+    }
+   ],
+   "loop": [
+    {
+     "layers": [],
+     "ms": 1000
+    }
+   ]
+  }
+ }
+}

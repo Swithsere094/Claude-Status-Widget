@@ -21,7 +21,7 @@ import psutil
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from pet_contract import HEIGHT, WIDTH, load_pets  # noqa: E402
+from pet_contract import HEIGHT, WIDTH, load_pets, palette_colors  # noqa: E402
 
 try:
     import winsound
@@ -123,23 +123,31 @@ class PetRegistry:
         return (isinstance(entry, dict) and entry.get("pet") in self.pets
                 and entry.get("color") in self.pets[entry["pet"]]["palettes"])
 
-    def assign(self, project, active_projects):
+    def assign(self, project, on_screen, forced_pet=None, persist=True):
+        """Mascota y color para un proyecto.
+
+        on_screen: combinaciones (mascota, color) que ya estan en pantalla, para no repetirlas.
+        forced_pet: obliga a usar esa mascota (lo usa el simulador).
+        persist: False para sesiones simuladas, que nunca se guardan en el registro.
+        """
         entry = self.map.get(project)
-        if self._valid(entry):
+        if persist and not forced_pet and self._valid(entry):
             return entry["pet"], entry["color"]
 
-        active = [self.map[p] for p in active_projects if p != project and self._valid(self.map.get(p))]
-        active_pets = {e["pet"] for e in active}
-        active_combos = {(e["pet"], e["color"]) for e in active}
-        all_combos = [(p, c) for p, pet in self.pets.items() for c in pet["palettes"]]
-        free = [x for x in all_combos if x not in active_combos]
+        on_screen = set(on_screen)
+        pets_on_screen = {p for p, _ in on_screen}
+        all_combos = [(p, c) for p, pet in self.pets.items() for c in pet["palettes"]
+                      if forced_pet in (None, p)] or \
+                     [(p, c) for p, pet in self.pets.items() for c in pet["palettes"]]
+        free = [x for x in all_combos if x not in on_screen]
         # Primero, una mascota que no este en pantalla; si todas lo estan, una combinacion libre.
-        candidates = [x for x in free if x[0] not in active_pets] or free or all_combos
+        candidates = [x for x in free if x[0] not in pets_on_screen] or free or all_combos
         pet_id = random.choice(sorted({p for p, _ in candidates}))
         color = random.choice([c for p, c in candidates if p == pet_id])
 
-        self.map[project] = {"pet": pet_id, "color": color}
-        self._save()
+        if persist:
+            self.map[project] = {"pet": pet_id, "color": color}
+            self._save()
         return pet_id, color
 
 
@@ -200,11 +208,11 @@ class PetAnimation:
         return self.pet["animations"][self.state].get("end", False) and not self.queue
 
     def frame_key(self):
-        """(capas, dy, dissolve) del frame actual, con el parpadeo aplicado."""
+        """(capas, dx, dy, dissolve) del frame actual, con el parpadeo aplicado."""
         f = self._current()
         targets = self.pet["blink"]["targets"] if self.blink_seq else ()
         layers = tuple(self.blink_seq[0][0] if n in targets else n for n in f["layers"])
-        return layers, f.get("dy", 0), f.get("dissolve", 0)
+        return layers, f.get("dx", 0), f.get("dy", 0), f.get("dissolve", 0)
 
 
 class SpriteRenderer:
@@ -220,30 +228,35 @@ class SpriteRenderer:
             random.Random(pid).shuffle(cells)
             self.dissolve_rank[pid] = {c: i / len(cells) for i, c in enumerate(cells)}
 
-    def image(self, pet_id, palette, layers, dy, dissolve):
-        key = (pet_id, palette, layers, dy, dissolve)
+    def image(self, pet_id, palette, layers, dx, dy, dissolve):
+        key = (pet_id, palette, layers, dx, dy, dissolve)
         img = self.cache.get(key)
         if img is None:
             img = self._render(*key)
             self.cache[key] = img
         return img
 
-    def _render(self, pet_id, palette, layers, dy, dissolve):
+    def _render(self, pet_id, palette, layers, dx, dy, dissolve):
         pet = self.pets[pet_id]
+        pal = pet["palettes"][palette]
         colors = dict(pet["shared_colors"])
-        colors.update({k: v for k, v in pet["palettes"][palette].items() if k != "name"})
+        colors.update(palette_colors(pal))
+        hidden = set(pal.get("hide_layers", []))
         fixed = set(pet.get("fixed_layers", []))
         grid = [[KEY] * WIDTH for _ in range(HEIGHT)]
         for name in layers:
+            if name in hidden:
+                continue
             L = pet["layers"][name]
-            off = 0 if name in fixed else dy
+            ox, oy = (0, 0) if name in fixed else (dx, dy)
             for y, row in enumerate(L["rows"]):
-                yy = L["y"] + y + off
+                yy = L["y"] + y + oy
                 if not 0 <= yy < HEIGHT:
                     continue
                 for x, ch in enumerate(row):
-                    if ch != pet["transparent"]:
-                        grid[yy][L["x"] + x] = colors[ch]
+                    xx = L["x"] + x + ox
+                    if ch != pet["transparent"] and 0 <= xx < WIDTH:
+                        grid[yy][xx] = colors[ch]
         if dissolve:
             rank = self.dissolve_rank[pet_id]
             for (x, y), r in rank.items():
@@ -325,7 +338,6 @@ class Widget:
         else:
             self.empty_since = None
 
-        active_projects = [d.get("project", "?") for d in sessions.values()]
         changed_layout = False
 
         # Sesion cerrada: la mascota se despide; se retira cuando termina la animacion.
@@ -341,7 +353,11 @@ class Widget:
                 continue  # termina de despedirse; si la sesion sigue, vuelve en el siguiente ciclo
             if slot is None:
                 project = d.get("project", "?")
-                pet_id, palette = self.registry.assign(project, active_projects)
+                on_screen = [(s["pet"], s["palette"]) for s in self.slots.values() if not s.get("leaving")]
+                simulated = bool(d.get("simulated"))
+                pet_id, palette = self.registry.assign(project, on_screen,
+                                                       forced_pet=d.get("pet") if simulated else None,
+                                                       persist=not simulated)
                 self.slots[sid] = {"anim": PetAnimation(self.pets[pet_id], state), "pet": pet_id,
                                    "palette": palette, "project": project, "state": state}
                 self.order.append(sid)
@@ -358,8 +374,8 @@ class Widget:
 
     # --- dibujo
     def _image_for(self, slot):
-        layers, dy, dissolve = slot["anim"].frame_key()
-        return self.renderer.image(slot["pet"], slot["palette"], layers, dy, dissolve)
+        layers, dx, dy, dissolve = slot["anim"].frame_key()
+        return self.renderer.image(slot["pet"], slot["palette"], layers, dx, dy, dissolve)
 
     def layout(self):
         self.canvas.delete("all")

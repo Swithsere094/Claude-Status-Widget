@@ -1,0 +1,762 @@
+{
+ "id": "bolt",
+ "name": "Bolt",
+ "species": "robot",
+ "description": "Robot de pixel art con un LED en la antena que cambia según el estado; se despide con un propulsor.",
+ "width": 24,
+ "height": 24,
+ "transparent": ".",
+ "fixed_layers": [
+  "bubble",
+  "check",
+  "z_small",
+  "z_big"
+ ],
+ "blink": {
+  "targets": [
+   "eyes_open",
+   "eyes_down"
+  ],
+  "min_ms": 3000,
+  "max_ms": 7000,
+  "sequence": [
+   [
+    "eyes_half",
+    50
+   ],
+   [
+    "eyes_closed",
+    90
+   ],
+   [
+    "eyes_half",
+    50
+   ]
+  ]
+ },
+ "shared_colors": {
+  "V": "#152030",
+  "E": "#7fe9ff",
+  "e": "#2f6f7a",
+  "Y": "#ffd23f",
+  "R": "#e5484d",
+  "G": "#3ccf6e",
+  "W": "#ffffff",
+  "K": "#4a5160",
+  "k": "#2a2f39",
+  "S": "#9ad1ff",
+  "Z": "#d4dde8"
+ },
+ "palettes": {
+  "acero": {
+   "name": "Acero",
+   "B": "#a9b4c2",
+   "b": "#7b8796",
+   "o": "#2b323c",
+   "l": "#d6e2ee"
+  },
+  "cobre": {
+   "name": "Cobre",
+   "B": "#c9825a",
+   "b": "#975a3a",
+   "o": "#3a1f14",
+   "l": "#f1c7a6"
+  },
+  "menta": {
+   "name": "Menta",
+   "B": "#7fd1b0",
+   "b": "#4f9e80",
+   "o": "#1b3a2f",
+   "l": "#d3f5e7"
+  },
+  "grafito": {
+   "name": "Grafito",
+   "B": "#5d6573",
+   "b": "#424956",
+   "o": "#16191f",
+   "l": "#a7b0bd"
+  },
+  "laton": {
+   "name": "Latón",
+   "B": "#d9b74f",
+   "b": "#a88a30",
+   "o": "#3d3010",
+   "l": "#f6e6a8"
+  }
+ },
+ "layers": {
+  "body": {
+   "x": 1,
+   "y": 4,
+   "rows": [
+    "..........bb..........",
+    "..........bb..........",
+    "..oooooooooooooooooo..",
+    ".obBBBBBBBBBBBBBBBBbo.",
+    ".obBVVVVVVVVVVVVVVBbo.",
+    "oobBVVVVVVVVVVVVVVBboo",
+    "oobBVVVVVVVVVVVVVVBboo",
+    ".obBVVVVVVVVVVVVVVBbo.",
+    ".obBBBBBBBBBBBBBBBBbo.",
+    "..oooooooooooooooooo..",
+    "....oooooooooooooo....",
+    "....obBBBBBBBBBBbo....",
+    "....obBBllllllBBbo....",
+    "....obBBllllllBBbo....",
+    "....obBBBBBBBBBBbo....",
+    "....oooooooooooooo....",
+    "......obbo..obbo......",
+    ".....ooooo..ooooo....."
+   ]
+  },
+  "eyes_open": {
+   "x": 7,
+   "y": 9,
+   "rows": [
+    "EE......EE",
+    "EE......EE"
+   ]
+  },
+  "eyes_down": {
+   "x": 7,
+   "y": 10,
+   "rows": [
+    "EE......EE",
+    "EE......EE"
+   ]
+  },
+  "eyes_half": {
+   "x": 7,
+   "y": 10,
+   "rows": [
+    "EE......EE"
+   ]
+  },
+  "eyes_closed": {
+   "x": 6,
+   "y": 10,
+   "rows": [
+    "eeee....eeee"
+   ]
+  },
+  "eyes_happy": {
+   "x": 6,
+   "y": 9,
+   "rows": [
+    ".EE......EE.",
+    "E..E....E..E"
+   ]
+  },
+  "led_idle": {
+   "x": 11,
+   "y": 2,
+   "rows": [
+    "EE",
+    "EE"
+   ]
+  },
+  "led_work": {
+   "x": 11,
+   "y": 2,
+   "rows": [
+    "YY",
+    "YY"
+   ]
+  },
+  "led_done": {
+   "x": 11,
+   "y": 2,
+   "rows": [
+    "GG",
+    "GG"
+   ]
+  },
+  "led_alert": {
+   "x": 11,
+   "y": 2,
+   "rows": [
+    "RR",
+    "RR"
+   ]
+  },
+  "led_off": {
+   "x": 11,
+   "y": 2,
+   "rows": [
+    "oo",
+    "oo"
+   ]
+  },
+  "arm_r": {
+   "x": 19,
+   "y": 15,
+   "rows": [
+    "oo.",
+    "obo",
+    "oo."
+   ]
+  },
+  "arm_up": {
+   "x": 19,
+   "y": 4,
+   "rows": [
+    "..o.o",
+    "..oBo",
+    "..ooo",
+    "..oBo",
+    "..oBo",
+    "..oBo",
+    "..ooo",
+    "..oBo",
+    "..oBo",
+    "..oBo",
+    "oooBo",
+    "oBBBo",
+    "ooooo"
+   ]
+  },
+  "arm_mid": {
+   "x": 19,
+   "y": 10,
+   "rows": [
+    "...oo",
+    "..oBo",
+    "..oBo",
+    ".oBo.",
+    "oBo..",
+    "oBBo.",
+    "oooo."
+   ]
+  },
+  "laptop": {
+   "x": 4,
+   "y": 17,
+   "rows": [
+    ".kkkkkkkkkkkkkk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKSSKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    "kkkkkkkkkkkkkkkk"
+   ]
+  },
+  "tip_l_up": {
+   "x": 6,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_l_down": {
+   "x": 6,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_up": {
+   "x": 15,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_down": {
+   "x": 15,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "flame_a": {
+   "x": 7,
+   "y": 22,
+   "rows": [
+    "YRRY..YRRY",
+    ".RR....RR."
+   ]
+  },
+  "flame_b": {
+   "x": 7,
+   "y": 22,
+   "rows": [
+    ".YY....YY.",
+    "YRRY..YRRY"
+   ]
+  },
+  "bubble": {
+   "x": 14,
+   "y": 0,
+   "rows": [
+    ".WWW.",
+    "WWRWW",
+    "WWRWW",
+    "WWWWW",
+    "WWRWW",
+    ".WWW."
+   ]
+  },
+  "check": {
+   "x": 18,
+   "y": 0,
+   "rows": [
+    "....G",
+    "...GG",
+    "G.GG.",
+    "GGG..",
+    ".G..."
+   ]
+  },
+  "z_small": {
+   "x": 15,
+   "y": 3,
+   "rows": [
+    "ZZ",
+    ".Z",
+    "ZZ"
+   ]
+  },
+  "z_big": {
+   "x": 18,
+   "y": 0,
+   "rows": [
+    "ZZZ",
+    "..Z",
+    ".Z.",
+    "Z..",
+    "ZZZ"
+   ]
+  },
+  "arm_l": {
+   "x": 2,
+   "y": 15,
+   "rows": [
+    ".oo",
+    "obo",
+    ".oo"
+   ]
+  }
+ },
+ "animations": {
+  "idle": {
+   "label": "inactiva",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_idle"
+     ],
+     "ms": 1400
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open"
+     ],
+     "ms": 250
+    }
+   ]
+  },
+  "sleep": {
+   "label": "dormido",
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "led_off"
+     ],
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "led_off",
+      "z_small"
+     ],
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_closed",
+      "led_off",
+      "z_small",
+      "z_big"
+     ],
+     "ms": 900
+    }
+   ]
+  },
+  "working": {
+   "label": "trabajando",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "eyes_down",
+      "led_work",
+      "laptop",
+      "tip_l_up",
+      "tip_r_down"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_down",
+      "laptop",
+      "tip_l_down",
+      "tip_r_up"
+     ],
+     "ms": 150
+    }
+   ]
+  },
+  "done": {
+   "label": "listo",
+   "blink": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "led_done"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "led_done"
+     ],
+     "dy": -3,
+     "ms": 140
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "led_done"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "led_done"
+     ],
+     "ms": 120
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_happy",
+      "led_done",
+      "check"
+     ],
+     "ms": 900
+    }
+   ],
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_done",
+      "check"
+     ],
+     "ms": 1000
+    }
+   ]
+  },
+  "waiting": {
+   "label": "te espera",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_up",
+      "eyes_open",
+      "led_alert",
+      "bubble"
+     ],
+     "ms": 300
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_up",
+      "eyes_open",
+      "bubble"
+     ],
+     "dy": -1,
+     "ms": 300
+    }
+   ]
+  },
+  "bye": {
+   "label": "despedida",
+   "end": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_up",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_mid",
+      "eyes_happy",
+      "led_idle"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "dy": -1,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "dy": -2,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "dy": -4,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "dy": -6,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "dy": -9,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "dy": -12,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "dy": -16,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_a"
+     ],
+     "dy": -20,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "eyes_open",
+      "led_work",
+      "flame_b"
+     ],
+     "dy": -25,
+     "ms": 70
+    }
+   ],
+   "loop": [
+    {
+     "layers": [],
+     "ms": 1000
+    }
+   ]
+  }
+ }
+}

@@ -13,11 +13,59 @@ Widget flotante para Windows que muestra una mascota animada por cada sesión de
 
 ## Mascotas
 
-| Mascota | Nombre | Colores |
-|---|---|---|
-| Búho | Bubo | Petróleo, violeta, naranja, cielo, rosa |
+Hay cuatro mascotas, cada una con cinco colores y su propia forma de vivir cada estado.
 
-Cada proyecto (carpeta) recibe al azar una mascota y uno de sus colores la primera vez que aparece, y los conserva para siempre. Al asignar se evita repetir: primero se elige una mascota que no esté en pantalla y, si todas lo están, una combinación de mascota y color que no esté en uso.
+### Bubo, el búho
+
+Parpadea, teclea en su portátil, da un saltito al terminar, levanta el ala con un "!" cuando te espera y, al despedirse, saluda y sale volando.
+
+| Color | Tono principal |
+|---|---|
+| Petróleo | `#2a9d8f` |
+| Violeta | `#8a6bd1` |
+| Naranja | `#d96f4b` |
+| Cielo | `#4a8fe7` |
+| Rosa | `#e06c9f` |
+
+### Bolt, el robot
+
+Tiene un LED en la antena que indica el estado: cian en reposo, amarillo titilando mientras trabaja, verde al terminar, rojo cuando te espera y apagado cuando duerme. Levanta el brazo para llamarte y se despide con un propulsor.
+
+| Color | Tono principal |
+|---|---|
+| Acero | `#a9b4c2` |
+| Cobre | `#c9825a` |
+| Menta | `#7fd1b0` |
+| Grafito | `#5d6573` |
+| Latón | `#d9b74f` |
+
+### Whiskers, el gato
+
+Mece la cola en reposo, trabaja con las patas sobre el teclado, se estira antes de celebrar, maúlla con la cola parada cuando te espera, duerme echado con la cola enroscada y se despide saliendo de un salto.
+
+| Color | Pelaje |
+|---|---|
+| Atigrado | Naranja con rayas |
+| Bicolor | Blanco con capucha y cola negras, ojos amarillo verdoso |
+| Negro | Negro con ojos amarillos |
+| Crema | Crema con rayas suaves y ojos azules |
+| Calicó | Blanco con manchas naranja y negras |
+
+### Mist, el fantasma
+
+Siempre flota con el borde ondulando. Da una vuelta al terminar, abre la boquita cuando te espera y, al despedirse, se desvanece píxel a píxel mientras sube.
+
+| Color | Tono principal |
+|---|---|
+| Blanco | `#eef2f7` |
+| Lila | `#dccbf6` |
+| Menta | `#c4f0dc` |
+| Celeste | `#c6e4fb` |
+| Rosa | `#fbd0e0` |
+
+### Cómo se asignan
+
+Cada proyecto (carpeta) recibe al azar una mascota y uno de sus colores la primera vez que aparece, y los conserva para siempre. Al asignar se evita repetir lo que ya está en pantalla: primero se elige una mascota que no se esté mostrando y, si ya están las cuatro, una combinación de mascota y color que no esté en uso.
 
 ## Cómo funciona
 
@@ -65,9 +113,12 @@ Si actualizas desde la versión de solo búhos, borra la carpeta `sprites` de `.
 ```
 python tools/simulate.py      # abre el widget con 4 sesiones falsas que cambian de estado
 python tools/check_pets.py    # revisa que cada mascota cumpla el contrato
+python tools/preview.py       # genera preview.html con todas las mascotas animadas
 ```
 
-`simulate.py` acepta `--sesiones 1-5`, `--intervalo <segundos>` y `--sin-widget`. Con `Ctrl+C` las sesiones falsas se eliminan y el widget se cierra solo.
+`simulate.py` acepta `--sesiones 1-5`, `--intervalo <segundos>`, `--mascota <bubo|bolt|whiskers|mist>` para ver solo una mascota y `--sin-widget`. Las sesiones simuladas nunca se guardan en el registro de asignaciones, así que no cambian las mascotas de tus proyectos. Con `Ctrl+C` las sesiones se despiden y el widget se cierra solo.
+
+`preview.py` crea `preview.html` en la raíz del proyecto; ábrelo en el navegador para ver cada mascota en sus 6 estados y 5 colores.
 
 ## Crear o editar mascotas
 
@@ -76,10 +127,11 @@ Cada mascota vive en su carpeta, `pets/<id>/pet.json`, y debe cumplir el contrat
 - Lienzo de 24×24 píxeles. El widget lo dibuja a escala ×4.
 - Las 6 animaciones obligatorias: `idle`, `working`, `done`, `waiting`, `sleep` y `bye` (esta última con `"end": true`).
 - Capas de pixel art como cuadrículas de caracteres; cada carácter es un color de la paleta y `.` es transparente.
-- Cada frame lista sus capas y su duración, y puede desplazarlas en vertical (`dy`) o desvanecerlas (`dissolve`, de 0 a 1).
+- Cada frame lista sus capas y su duración, y puede desplazarlas (`dx`, `dy`) o desvanecerlas (`dissolve`, de 0 a 1).
+- Cada color puede ocultar capas con `hide_layers`, para marcas que solo tiene un pelaje (como la capucha del bicolor o las manchas del calicó).
 - Parpadeo opcional.
 
-Después de editar, corre `python tools/check_pets.py`.
+Después de editar, corre `python tools/check_pets.py` y revisa el resultado con `python tools/preview.py`.
 
 ## Personalizar
 
