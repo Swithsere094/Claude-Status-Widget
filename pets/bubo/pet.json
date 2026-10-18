@@ -1,8 +1,10 @@
 {
- "name": "buho",
+ "id": "bubo",
+ "name": "Bubo",
+ "species": "búho",
+ "description": "Búho de pixel art: parpadea, teclea en su portátil, salta al terminar y sale volando al despedirse.",
  "width": 24,
  "height": 24,
- "scale": 4,
  "transparent": ".",
  "fixed_layers": [
   "bubble",
