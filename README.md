@@ -72,6 +72,7 @@ Cada proyecto (carpeta) recibe al azar una mascota y uno de sus colores la prime
 - Los **hooks** de Claude Code ejecutan `claude_status.py` en cada evento de la sesión. El script guarda el estado en `~/.claude/status/<session_id>.json`, junto con el PID del proceso de Claude Code.
 - `claude_widget.pyw` lee esa carpeta cada segundo y anima una mascota por sesión. Las mascotas se cargan de `pets/<id>/pet.json`.
 - El widget se abre solo al iniciar una sesión, y nunca hay más de uno abierto.
+- Una sesión recién abierta e inactiva espera 3 segundos antes de mostrar su mascota. La extensión de VS Code a veces lanza un proceso extra que cierra al segundo, y así ese proceso nunca aparece. Si la sesión empieza a trabajar o pide algo, su mascota aparece de inmediato.
 - Si una sesión se cierra (con `/exit`, con la X de la terminal o cerrando VS Code), su mascota se despide. Cuando no queda ninguna sesión, el widget se cierra solo.
 - Las asignaciones se guardan en `~/.claude/claude_widget_pets.json`. Bórralo si quieres que se sorteen de nuevo. Si vienes de la versión de solo búhos, tus proyectos conservan su búho y su color.
 - Si una mascota no cumple el contrato, el widget la ignora y lo anota en `~/.claude/claude_widget.log`.
@@ -148,4 +149,5 @@ En la cabecera de `claude_widget.pyw`:
   ```
   Si dice que no encuentra `pet_contract`, copia `pet_contract.py` y la carpeta `pets` junto a `claude_widget.pyw`.
 - **No se crean archivos en `~/.claude/status/`.** Revisa que el JSON de `settings.json` sea válido (sin comas faltantes o sobrantes).
+- **Diagnóstico de eventos.** Crea un archivo vacío llamado `claude_widget_debug` en `~/.claude/`. Desde ese momento, cada evento de Claude Code se anota en `~/.claude/claude_status_debug.log` con su sesión, su origen y la cadena de procesos. Borra el archivo para desactivarlo.
 - **`ModuleNotFoundError: psutil`.** Instala psutil con el mismo intérprete de los hooks (`python -m pip install psutil` o `py -m pip install psutil`).

@@ -39,6 +39,8 @@ LOG_FILE = CLAUDE_DIR / "claude_widget.log"
 
 SCALE = 4                  # entero, para que el pixel art se vea nitido
 SLEEP_AFTER = 10 * 60      # segundos inactiva o lista antes de dormirse
+NEW_SESSION_GRACE = 3      # una sesion recien abierta e inactiva espera esto antes de mostrarse
+                           # (VS Code a veces lanza un proceso extra que cierra al segundo)
 STALE_SECONDS = 6 * 3600   # respaldo si no se pudo identificar el proceso
 EMPTY_CLOSE_SECONDS = 5    # se cierra tras 5 s sin sesiones
 FRAME_MS = 33              # ~30 fps
@@ -292,6 +294,7 @@ class Widget:
         self.slots = {}         # session_id -> dict(anim, pet, palette, project, state, ...)
         self.order = []         # orden estable de izquierda a derecha
         self.empty_since = None
+        self.pending = True     # hay sesiones esperando confirmacion (no se muestra "sin agentes")
         self.right_edge = r.winfo_screenwidth() - MARGIN
         self.top = MARGIN
         self.last_tick = time.perf_counter()
@@ -302,6 +305,7 @@ class Widget:
         self.canvas.bind("<Button-3>", lambda e: r.destroy())
 
         STATUS_DIR.mkdir(parents=True, exist_ok=True)
+        self.layout()           # ubica la ventana desde el inicio, aunque aun no haya mascotas
         self.poll()
         self.animate()
 
@@ -339,6 +343,7 @@ class Widget:
             self.empty_since = None
 
         changed_layout = False
+        pending = False
 
         # Sesion cerrada: la mascota se despide; se retira cuando termina la animacion.
         for sid, slot in self.slots.items():
@@ -351,6 +356,9 @@ class Widget:
             slot = self.slots.get(sid)
             if slot is not None and slot.get("leaving"):
                 continue  # termina de despedirse; si la sesion sigue, vuelve en el siguiente ciclo
+            if slot is None and state == "idle" and time.time() - d.get("ts", 0) < NEW_SESSION_GRACE:
+                pending = True
+                continue  # aun no se sabe si la sesion va a sobrevivir; si trabaja o pide algo, sale ya
             if slot is None:
                 project = d.get("project", "?")
                 on_screen = [(s["pet"], s["palette"]) for s in self.slots.values() if not s.get("leaving")]
@@ -368,6 +376,9 @@ class Widget:
                 slot["anim"].set_state(state)
                 slot["state"] = state
 
+        if pending != self.pending:
+            self.pending = pending
+            changed_layout = changed_layout or not self.order
         if changed_layout:
             self.layout()
         self.root.after(POLL_MS, self.poll)
@@ -385,7 +396,7 @@ class Widget:
         self.canvas.config(width=width, height=height)
         self.root.geometry(f"{width}x{height}+{self.right_edge - width}+{self.top}")
 
-        if not self.order:
+        if not self.order and not self.pending:
             self._pill(width / 2, self.pet_h + 2, "sin agentes", "empty")
         for idx, sid in enumerate(self.order):
             slot = self.slots[sid]

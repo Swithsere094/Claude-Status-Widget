@@ -12,7 +12,11 @@ from pathlib import Path
 
 import psutil
 
-STATUS_DIR = Path.home() / ".claude" / "status"
+CLAUDE_DIR = Path.home() / ".claude"
+STATUS_DIR = CLAUDE_DIR / "status"
+# Diagnostico: si existe este archivo (vacio), cada evento se anota en DEBUG_LOG.
+DEBUG_FLAG = CLAUDE_DIR / "claude_widget_debug"
+DEBUG_LOG = CLAUDE_DIR / "claude_status_debug.log"
 CLAUDE_NAMES = {"claude.exe", "claude", "node.exe", "node"}
 
 
@@ -27,6 +31,29 @@ def find_claude_process():
     except psutil.Error:
         pass
     return None
+
+
+def debug(state, data, proc):
+    """Anota el evento y la cadena de procesos padre, solo si el diagnostico esta activo."""
+    if not DEBUG_FLAG.exists():
+        return
+    chain = []
+    try:
+        p = psutil.Process(os.getpid()).parent()
+        while p is not None and len(chain) < 8:
+            chain.append(f"{p.name()}:{p.pid}")
+            p = p.parent()
+    except psutil.Error:
+        pass
+    keys = ("hook_event_name", "source", "reason", "notification_type", "session_id", "cwd")
+    info = " ".join(f"{k}={data[k]}" for k in keys if k in data)
+    line = (f"{time.strftime('%H:%M:%S')} {state:8} {info} "
+            f"claude_pid={proc.pid if proc else None} cadena={' > '.join(chain)}\n")
+    try:
+        with DEBUG_LOG.open("a", encoding="utf-8") as f:
+            f.write(line)
+    except OSError:
+        pass
 
 
 def launch_widget():
@@ -44,6 +71,8 @@ try:
     data = json.load(sys.stdin)
 except Exception:
     data = {}
+proc = find_claude_process()
+debug(state, data, proc)
 
 # "te espera" es solo para lo que necesita respuesta (permisos, preguntas).
 # El aviso de inactividad (idle_prompt) llega aunque ya haya terminado: se ignora.
@@ -61,7 +90,6 @@ if state == "end":
     status_file.unlink(missing_ok=True)
     sys.exit(0)
 
-proc = find_claude_process()
 record = {
     "project": Path(cwd).name,
     "state": "idle" if state == "start" else state,
