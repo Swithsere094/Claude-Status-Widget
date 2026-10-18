@@ -45,6 +45,12 @@ try:
 except Exception:
     data = {}
 
+# "te espera" es solo para lo que necesita respuesta (permisos, preguntas).
+# El aviso de inactividad (idle_prompt) llega aunque ya haya terminado: se ignora.
+if state == "waiting" and (data.get("notification_type") == "idle_prompt"
+                           or "waiting for your input" in str(data.get("message", "")).lower()):
+    sys.exit(0)
+
 session_id = data.get("session_id", "desconocida")
 cwd = data.get("cwd", os.getcwd())
 

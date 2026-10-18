@@ -7,7 +7,7 @@ Widget flotante para Windows que muestra una mascota animada por cada sesión de
 | inactiva | Reposa y parpadea a intervalos aleatorios |
 | trabajando | Teclea en su portátil |
 | listo | Celebra y queda con un ✓ encima (suena un aviso) |
-| te espera | Pide atención con un "!" (suena un aviso). Necesita una aprobación o tu respuesta |
+| te espera | Pide atención con un "!" (suena un aviso). Solo cuando necesita un permiso o que respondas una pregunta |
 | dormido | Tras 10 minutos inactiva o lista, se duerme |
 | despedida | Al cerrarse la sesión, se despide y sale de escena |
 
