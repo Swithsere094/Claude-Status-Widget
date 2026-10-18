@@ -1,0 +1,510 @@
+{
+ "name": "buho",
+ "width": 24,
+ "height": 24,
+ "scale": 4,
+ "transparent": ".",
+ "fixed_layers": [
+  "bubble",
+  "check",
+  "z_small",
+  "z_big"
+ ],
+ "blink": {
+  "targets": [
+   "eyes_open",
+   "eyes_down"
+  ],
+  "min_ms": 2500,
+  "max_ms": 6500,
+  "sequence": [
+   [
+    "eyes_half",
+    60
+   ],
+   [
+    "eyes_closed",
+    110
+   ],
+   [
+    "eyes_half",
+    60
+   ]
+  ]
+ },
+ "shared_colors": {
+  "W": "#ffffff",
+  "P": "#1b1b1b",
+  "Y": "#f2c14e",
+  "L": "#f3ead2",
+  "l": "#d9cba6",
+  "K": "#4a5160",
+  "k": "#2a2f39",
+  "S": "#9ad1ff",
+  "G": "#3ccf6e",
+  "R": "#e5484d",
+  "Z": "#d4dde8"
+ },
+ "palettes": {
+  "petroleo": {
+   "name": "Petróleo",
+   "B": "#2a9d8f",
+   "b": "#1d6e65",
+   "o": "#123330"
+  },
+  "violeta": {
+   "name": "Violeta",
+   "B": "#8a6bd1",
+   "b": "#5f47a2",
+   "o": "#2a1f45"
+  },
+  "naranja": {
+   "name": "Naranja",
+   "B": "#d96f4b",
+   "b": "#a34c30",
+   "o": "#3b1a10"
+  },
+  "cielo": {
+   "name": "Cielo",
+   "B": "#4a8fe7",
+   "b": "#2e62a8",
+   "o": "#162a47"
+  },
+  "rosa": {
+   "name": "Rosa",
+   "B": "#e06c9f",
+   "b": "#a6457a",
+   "o": "#3d1a2d"
+  }
+ },
+ "layers": {
+  "body": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "..o..........o..",
+    ".oBo........oBo.",
+    ".oBBooooooooBBo.",
+    ".oBBBBBBBBBBBBo.",
+    "oBBBBBBBBBBBBBBo",
+    "oBBBBBBBBBBBBBBo",
+    "oBBBBBBBBBBBBBBo",
+    "oBBBBBBBBBBBBBBo",
+    "oBBBBBBBBBBBBBBo",
+    "oBBBBBBYYBBBBBBo",
+    "obBBBBBYYBBBBBbo",
+    "obbLLLLLLLLLLbbo",
+    "obbLLlLLLLlLLbbo",
+    "obbLLLLLLLLLLbbo",
+    ".obbLLLLLLLLbbo.",
+    "..oooooooooooo..",
+    "...YY......YY..."
+   ]
+  },
+  "eyes_open": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "..WWWW....WWWW..",
+    ".WWWWWW..WWWWWW.",
+    ".WWPPWW..WWPPWW.",
+    ".WWPPWW..WWPPWW.",
+    "..WWWW....WWWW..",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "eyes_down": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "..WWWW....WWWW..",
+    ".WWWWWW..WWWWWW.",
+    ".WWWWWW..WWWWWW.",
+    ".WWPPWW..WWPPWW.",
+    "..WPPW....WPPW..",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "eyes_half": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".bbbbbb..bbbbbb.",
+    ".WWPPWW..WWPPWW.",
+    ".WWPPWW..WWPPWW.",
+    "..WWWW....WWWW..",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "eyes_closed": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".o....o..o....o.",
+    "..oooo....oooo..",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "eyes_happy": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "..oooo....oooo..",
+    ".o....o..o....o.",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................"
+   ]
+  },
+  "wing_r_hide": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "..............B.",
+    ".............BB.",
+    ".............BB.",
+    ".............BB.",
+    "............BB..",
+    "................",
+    "................"
+   ]
+  },
+  "wing_up": {
+   "x": 20,
+   "y": 6,
+   "rows": [
+    "..oo",
+    ".obo",
+    ".obo",
+    "obbo",
+    "obbo",
+    "obo.",
+    "obo.",
+    "oo.."
+   ]
+  },
+  "laptop": {
+   "x": 4,
+   "y": 17,
+   "rows": [
+    ".kkkkkkkkkkkkkk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKSSKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    ".kKKKKKKKKKKKKk.",
+    "kkkkkkkkkkkkkkkk"
+   ]
+  },
+  "tip_l_up": {
+   "x": 6,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_l_down": {
+   "x": 6,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_up": {
+   "x": 15,
+   "y": 16,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "tip_r_down": {
+   "x": 15,
+   "y": 17,
+   "rows": [
+    "ooo",
+    "oBo"
+   ]
+  },
+  "bubble": {
+   "x": 12,
+   "y": 0,
+   "rows": [
+    ".WWW.",
+    "WWRWW",
+    "WWRWW",
+    "WWWWW",
+    "WWRWW",
+    ".WWW.",
+    ".W..."
+   ]
+  },
+  "check": {
+   "x": 18,
+   "y": 1,
+   "rows": [
+    "....G",
+    "...GG",
+    "G.GG.",
+    "GGG..",
+    ".G..."
+   ]
+  },
+  "z_small": {
+   "x": 17,
+   "y": 3,
+   "rows": [
+    "ZZ",
+    ".Z",
+    "ZZ"
+   ]
+  },
+  "z_big": {
+   "x": 20,
+   "y": 0,
+   "rows": [
+    "ZZZ",
+    "..Z",
+    ".Z.",
+    "Z..",
+    "ZZZ"
+   ]
+  }
+ },
+ "animations": {
+  "idle": {
+   "label": "inactiva",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "eyes_open"
+     ],
+     "ms": 1000
+    }
+   ]
+  },
+  "sleep": {
+   "label": "dormido",
+   "blink": false,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "eyes_closed"
+     ],
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_closed",
+      "z_small"
+     ],
+     "ms": 700
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_closed",
+      "z_small",
+      "z_big"
+     ],
+     "ms": 900
+    }
+   ]
+  },
+  "working": {
+   "label": "trabajando",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "eyes_down",
+      "laptop",
+      "tip_l_up",
+      "tip_r_down"
+     ],
+     "ms": 170
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_down",
+      "laptop",
+      "tip_l_down",
+      "tip_r_up"
+     ],
+     "ms": 170
+    }
+   ]
+  },
+  "done": {
+   "label": "listo",
+   "blink": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "eyes_happy"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_happy"
+     ],
+     "dy": -3,
+     "ms": 140
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_happy"
+     ],
+     "dy": -1,
+     "ms": 90
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_happy"
+     ],
+     "dy": 0,
+     "ms": 120
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_happy"
+     ],
+     "dy": -2,
+     "ms": 120
+    },
+    {
+     "layers": [
+      "body",
+      "eyes_happy",
+      "check"
+     ],
+     "dy": 0,
+     "ms": 900
+    }
+   ],
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "eyes_open",
+      "check"
+     ],
+     "ms": 1000
+    }
+   ]
+  },
+  "waiting": {
+   "label": "te espera",
+   "blink": true,
+   "loop": [
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_open",
+      "wing_up",
+      "bubble"
+     ],
+     "dy": 0,
+     "ms": 320
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_open",
+      "wing_up",
+      "bubble"
+     ],
+     "dy": -1,
+     "ms": 320
+    }
+   ]
+  }
+ }
+}

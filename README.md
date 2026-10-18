@@ -1,20 +1,24 @@
-# Claude Code Status Widget
+# Búhos de Claude Code
 
-Widget flotante para Windows que muestra en tiempo real el estado de tus sesiones de Claude Code (terminal o VS Code), para que puedas trabajar en otra cosa mientras los agentes corren en segundo plano.
+Widget flotante para Windows que muestra un búho animado por cada sesión de Claude Code (terminal o VS Code). Así ves de un vistazo qué agentes siguen trabajando, cuáles terminaron y cuáles te esperan, mientras haces otra cosa.
 
-| Indicador | Estado |
+| Estado | Qué hace el búho |
 |---|---|
-| ⚪ inactiva | Sesión abierta, sin tareas |
-| 🟡 trabajando | El agente está ejecutando una tarea |
-| 🟢 listo | El agente terminó (suena un aviso) |
-| 🔴 te espera | Necesita aprobación o tu respuesta (suena un aviso) |
+| inactiva | Sentado, parpadea a intervalos aleatorios |
+| trabajando | Teclea en su portátil |
+| listo | Da un saltito y queda con un ✓ encima (suena un aviso) |
+| te espera | Levanta el ala con un "!" y rebota (suena un aviso). Necesita una aprobación o tu respuesta |
+| dormido | Tras 10 minutos inactivo o listo, se duerme |
+
+Cada proyecto (carpeta) tiene su propio color entre cinco: petróleo, violeta, naranja, cielo y rosa. El color se asigna la primera vez que aparece el proyecto, eligiendo uno que no esté en uso por otra sesión abierta, y se conserva para siempre.
 
 ## Cómo funciona
 
 - Los **hooks** de Claude Code ejecutan `claude_status.py` en cada evento de la sesión. El script guarda el estado en `~/.claude/status/<session_id>.json`, junto con el PID del proceso de Claude Code.
-- `claude_widget.pyw` lee esa carpeta cada segundo y muestra una fila por sesión.
+- `claude_widget.pyw` lee esa carpeta cada segundo y anima un búho por sesión. Los sprites, colores y animaciones vienen de `sprites/owl.json`.
 - El widget se abre solo al iniciar una sesión, y nunca hay más de uno abierto.
-- Si una sesión se cierra (con `/exit`, con la X de la terminal o cerrando VS Code), su fila desaparece. Cuando no queda ninguna sesión, el widget se cierra solo.
+- Si una sesión se cierra (con `/exit`, con la X de la terminal o cerrando VS Code), su búho desaparece. Cuando no queda ninguna sesión, el widget se cierra solo.
+- Los colores asignados se guardan en `~/.claude/claude_widget_colors.json`. Bórralo si quieres reasignarlos.
 
 ## Requisitos
 
@@ -28,7 +32,10 @@ Widget flotante para Windows que muestra en tiempo real el estado de tus sesione
    ```
    python -m pip install -r requirements.txt
    ```
-2. Copia `claude_status.py` y `claude_widget.pyw` a `C:\Users\TU_USUARIO\.claude\`.
+2. Copia a `C:\Users\TU_USUARIO\.claude\`:
+   - `claude_status.py`
+   - `claude_widget.pyw`
+   - la carpeta `sprites` completa (el widget busca `sprites\owl.json` junto a él)
 3. Agrega el bloque `"hooks"` de `settings.example.json` a `C:\Users\TU_USUARIO\.claude\settings.json`:
    - Reemplaza `TU_USUARIO` por tu usuario de Windows. Puedes verlo con `echo $env:USERNAME` en PowerShell.
    - Usa barras `/` en las rutas.
@@ -38,9 +45,26 @@ Widget flotante para Windows que muestra en tiempo real el estado de tus sesione
 
 ## Uso
 
-- **Arrastrar** (clic izquierdo): mueve el widget.
-- **Doble clic** sobre una fila: descarta esa sesión.
+- **Arrastrar** (clic izquierdo sobre un búho): mueve el widget. Las zonas transparentes dejan pasar los clics a lo que hay debajo, así que hay que agarrar al búho o su etiqueta.
+- **Doble clic** sobre un búho: descarta esa sesión. Vuelve a aparecer en el siguiente evento de Claude Code.
 - **Clic derecho**: cierra el widget. Se vuelve a abrir con la próxima sesión.
+
+## Probar sin Claude Code
+
+```
+python tools/simulate.py
+```
+
+Abre el widget con 4 sesiones falsas que cambian de estado cada pocos segundos. Con `Ctrl+C` se eliminan y el widget se cierra solo. Opciones: `--sesiones 1-5`, `--intervalo <segundos>`, `--sin-widget`.
+
+## Personalizar
+
+En la cabecera de `claude_widget.pyw`:
+
+- `SCALE`: tamaño del búho. Debe ser un entero para que el pixel art se vea nítido. Por defecto usa el de `owl.json` (×4, 96 px de ancho).
+- `SLEEP_AFTER`: segundos antes de que un búho inactivo se duerma.
+
+En `sprites/owl.json` están las paletas (`palettes`), las capas de pixel art (`layers`) y las animaciones (`animations`). Cada capa es una cuadrícula de caracteres, y cada carácter es un color de la paleta (`.` es transparente).
 
 ## Solución de problemas
 
@@ -48,6 +72,6 @@ Widget flotante para Windows que muestra en tiempo real el estado de tus sesione
   ```
   python C:/Users/TU_USUARIO/.claude/claude_status.py start
   ```
-  y revisa el error que muestre.
+  y revisa el error que muestre. Si dice que no encuentra `owl.json`, copia la carpeta `sprites` junto a `claude_widget.pyw`.
 - **No se crean archivos en `~/.claude/status/`.** Revisa que el JSON de `settings.json` sea válido (sin comas faltantes o sobrantes).
 - **`ModuleNotFoundError: psutil`.** Instala psutil con el mismo intérprete de los hooks (`python -m pip install psutil` o `py -m pip install psutil`).
