@@ -9,6 +9,7 @@ Widget flotante para Windows que muestra un búho animado por cada sesión de Cl
 | listo | Da un saltito y queda con un ✓ encima (suena un aviso) |
 | te espera | Levanta el ala con un "!" y rebota (suena un aviso). Necesita una aprobación o tu respuesta |
 | dormido | Tras 10 minutos inactivo o listo, se duerme |
+| despedida | Al cerrarse la sesión, saluda con el ala y sale volando |
 
 Cada proyecto (carpeta) tiene su propio color entre cinco: petróleo, violeta, naranja, cielo y rosa. El color se asigna la primera vez que aparece el proyecto, eligiendo uno que no esté en uso por otra sesión abierta, y se conserva para siempre.
 
@@ -17,7 +18,7 @@ Cada proyecto (carpeta) tiene su propio color entre cinco: petróleo, violeta, n
 - Los **hooks** de Claude Code ejecutan `claude_status.py` en cada evento de la sesión. El script guarda el estado en `~/.claude/status/<session_id>.json`, junto con el PID del proceso de Claude Code.
 - `claude_widget.pyw` lee esa carpeta cada segundo y anima un búho por sesión. Los sprites, colores y animaciones vienen de `sprites/owl.json`.
 - El widget se abre solo al iniciar una sesión, y nunca hay más de uno abierto.
-- Si una sesión se cierra (con `/exit`, con la X de la terminal o cerrando VS Code), su búho desaparece. Cuando no queda ninguna sesión, el widget se cierra solo.
+- Si una sesión se cierra (con `/exit`, con la X de la terminal o cerrando VS Code), su búho se despide y sale volando. Cuando no queda ninguna sesión, el widget se cierra solo.
 - Los colores asignados se guardan en `~/.claude/claude_widget_colors.json`. Bórralo si quieres reasignarlos.
 
 ## Requisitos

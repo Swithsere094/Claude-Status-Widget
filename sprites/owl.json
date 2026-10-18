@@ -341,6 +341,61 @@
     "Z..",
     "ZZZ"
    ]
+  },
+  "wing_mid": {
+   "x": 20,
+   "y": 11,
+   "rows": [
+    "oooo",
+    "obbo",
+    "ooo."
+   ]
+  },
+  "wing_up_l": {
+   "x": 0,
+   "y": 6,
+   "rows": [
+    "oo..",
+    "obo.",
+    "obo.",
+    "obbo",
+    "obbo",
+    ".obo",
+    ".obo",
+    "..oo"
+   ]
+  },
+  "wing_mid_l": {
+   "x": 0,
+   "y": 11,
+   "rows": [
+    "oooo",
+    "obbo",
+    ".ooo"
+   ]
+  },
+  "wing_l_hide": {
+   "x": 4,
+   "y": 5,
+   "rows": [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".B..............",
+    ".BB.............",
+    ".BB.............",
+    ".BB.............",
+    "..BB............",
+    "................",
+    "................"
+   ]
   }
  },
  "animations": {
@@ -503,6 +558,193 @@
      ],
      "dy": -1,
      "ms": 320
+    }
+   ]
+  },
+  "bye": {
+   "label": "despedida",
+   "blink": false,
+   "end": true,
+   "intro": [
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_up"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_mid"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_up"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_mid"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_up"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "eyes_happy",
+      "wing_mid"
+     ],
+     "ms": 150
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_happy",
+      "wing_mid",
+      "wing_mid_l"
+     ],
+     "dy": 1,
+     "ms": 160
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_up",
+      "wing_up_l"
+     ],
+     "dy": -1,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_mid",
+      "wing_mid_l"
+     ],
+     "dy": -3,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_up",
+      "wing_up_l"
+     ],
+     "dy": -5,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_mid",
+      "wing_mid_l"
+     ],
+     "dy": -8,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_up",
+      "wing_up_l"
+     ],
+     "dy": -11,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_mid",
+      "wing_mid_l"
+     ],
+     "dy": -14,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_up",
+      "wing_up_l"
+     ],
+     "dy": -18,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_mid",
+      "wing_mid_l"
+     ],
+     "dy": -22,
+     "ms": 70
+    },
+    {
+     "layers": [
+      "body",
+      "wing_r_hide",
+      "wing_l_hide",
+      "eyes_open",
+      "wing_up",
+      "wing_up_l"
+     ],
+     "dy": -26,
+     "ms": 70
+    }
+   ],
+   "loop": [
+    {
+     "layers": [],
+     "ms": 1000
     }
    ]
   }

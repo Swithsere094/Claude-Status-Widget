@@ -156,6 +156,10 @@ class OwlAnimation:
                     self.blink_seq = [list(x) for x in self.s["blink"]["sequence"]]
                     self.blink_t = 0
 
+    def finished(self):
+        """True cuando termino una animacion de salida (como la despedida)."""
+        return self.s["animations"][self.state].get("end", False) and not self.queue
+
     def frame_key(self):
         """(capas, desplazamiento vertical) del frame actual, con el parpadeo aplicado."""
         f = self._current()
@@ -264,7 +268,8 @@ class Widget:
 
     def poll(self):
         sessions = load_sessions()
-        if not sessions:
+        # El widget se cierra cuando no hay sesiones ni buhos despidiendose.
+        if not sessions and not self.owls:
             self.empty_since = self.empty_since or time.time()
             if time.time() - self.empty_since > EMPTY_CLOSE_SECONDS:
                 self.root.destroy()
@@ -275,16 +280,17 @@ class Widget:
         active_projects = [d.get("project", "?") for d in sessions.values()]
         changed_layout = False
 
-        for sid in list(self.owls):
-            if sid not in sessions:
-                self.canvas.delete(f"owl-{sid}")
-                del self.owls[sid]
-                self.order.remove(sid)
-                changed_layout = True
+        # Sesion cerrada: el buho se despide; se retira cuando termina la animacion.
+        for sid, owl in self.owls.items():
+            if sid not in sessions and not owl.get("leaving"):
+                owl["leaving"] = True
+                owl["anim"].set_state("bye")
 
         for sid, d in sessions.items():
             state = self.effective_state(d)
             owl = self.owls.get(sid)
+            if owl is not None and owl.get("leaving"):
+                continue  # termina de despedirse; si la sesion sigue, vuelve en el siguiente ciclo
             if owl is None:
                 project = d.get("project", "?")
                 palette = self.colors.color_for(project, active_projects)
@@ -335,12 +341,21 @@ class Widget:
         now = time.perf_counter()
         dt = min((now - self.last_tick) * 1000, 250)
         self.last_tick = now
-        for owl in self.owls.values():
+        gone = []
+        for sid, owl in self.owls.items():
             owl["anim"].tick(dt)
+            if owl.get("leaving") and owl["anim"].finished():
+                gone.append(sid)
+                continue
             if "image_item" in owl:
                 layers, dy = owl["anim"].frame_key()
                 self.canvas.itemconfig(owl["image_item"],
                                        image=self.renderer.image(owl["palette"], layers, dy))
+        if gone:
+            for sid in gone:
+                del self.owls[sid]
+                self.order.remove(sid)
+            self.layout()
         self.root.after(FRAME_MS, self.animate)
 
 
