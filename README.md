@@ -151,3 +151,7 @@ En la cabecera de `claude_widget.pyw`:
 - **No se crean archivos en `~/.claude/status/`.** Revisa que el JSON de `settings.json` sea válido (sin comas faltantes o sobrantes).
 - **Diagnóstico de eventos.** Crea un archivo vacío llamado `claude_widget_debug` en `~/.claude/`. Desde ese momento, cada evento de Claude Code se anota en `~/.claude/claude_status_debug.log` con su sesión, su origen y la cadena de procesos. Borra el archivo para desactivarlo.
 - **`ModuleNotFoundError: psutil`.** Instala psutil con el mismo intérprete de los hooks (`python -m pip install psutil` o `py -m pip install psutil`).
+
+## Licencia
+
+[MIT](LICENSE) © 2026 Daniel Jesús Castillo Botero
